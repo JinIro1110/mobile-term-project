@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="내 정보를 입력해주세요!"
+        android:text="설정"
         android:textSize="35dp"
         android:textStyle="bold"
         android:layout_marginTop="40dp"
@@ -26,14 +26,14 @@
         android:text="이름!"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nameTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이름을 입력해주세요!"
+        android:hint="이름 수정"
         app:startIconDrawable="@drawable/add"
         app:startIconContentDescription="이름"
         app:endIconMode="clear_text"
@@ -53,7 +53,7 @@
         android:text="몸무게!"
         android:textSize="25dp"
         android:textStyle="bold"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/weightTextField"
@@ -82,11 +82,19 @@
         android:valueTo="100" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/updateButton"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
-        android:text="다음으로" />
+        android:text="수정 완료" />
+    <Button
+        android:id="@+id/editButton"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:text="목표 설정" />
 </LinearLayout>
