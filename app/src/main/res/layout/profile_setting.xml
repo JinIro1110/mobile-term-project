@@ -96,5 +96,5 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal"
-        android:text="목표 설정" />
+        android:text="목표 수정" />
 </LinearLayout>
