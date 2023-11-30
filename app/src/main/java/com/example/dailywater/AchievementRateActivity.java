@@ -15,54 +15,6 @@ import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import java.util.Calendar;
 import java.util.HashSet;
 
-//public class AchievementRateActivity extends AppCompatActivity {
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.achievement_rate_page);
-//
-//        // ActionBar 설정
-//        ActionBar actionBar = getSupportActionBar();
-//        if (actionBar != null) {
-//            actionBar.setDisplayHomeAsUpEnabled(true);
-//            actionBar.setTitle(R.string.title_achievement_rate);
-//        }
-//
-//        // MaterialCalendarView 초기화
-//        MaterialCalendarView materialCalendarView = (MaterialCalendarView) findViewById(R.id.calendarView);
-//
-//        materialCalendarView.addDecorator(new DayViewDecorator() {
-//            @Override
-//            public boolean shouldDecorate(CalendarDay day) {
-//                // 특정 날짜를 여기서 지정합니다.
-//                CalendarDay dateToHighlight = CalendarDay.from(2023, Calendar.MARCH, 10);
-//                return day.equals(dateToHighlight);
-//            }
-//
-//            @Override
-//            public void decorate(DayViewFacade view) {
-//                view.setBackgroundDrawable(ContextCompat.getDrawable(AchievementRateActivity.this, R.drawable.custom_selector));
-//            }
-//        });
-//
-//        // MaterialCalendarView에서 날짜 선택 비활성화
-//        materialCalendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_NONE);
-//    }
-//
-//
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // 뒤로 가기 버튼을 처리합니다.
-//        if (item.getItemId() == android.R.id.home) {
-//            onBackPressed();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
-//}
 public class AchievementRateActivity extends AppCompatActivity {
 
     @Override

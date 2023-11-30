@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         createDatabase();
         createTables();
     }
@@ -33,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
                     null);
 
             println("database is created.");
-
-            dropAllTables(db);
 
         } catch(Exception ex) {
             ex.printStackTrace();
@@ -57,20 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void insertDummyData() {
 
-    }
-
-    private void dropAllTables(SQLiteDatabase db) {
-        try {
-            String[] tables = {"DailyResult", "ToDo"};
-
-            for (String table : tables) {
-                db.execSQL("DROP TABLE IF EXISTS " + table);
-            }
-            println("All tables are dropped.");
-        } catch(Exception ex) {
-            ex.printStackTrace();
-            println("Error in dropping tables.");
-        }
     }
 
 }
