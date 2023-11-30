@@ -81,14 +81,22 @@
         android:valueFrom="30"
         android:valueTo="100" />
 
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="0" />
+
     <Button
         android:id="@+id/updateButton"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
         android:text="수정 완료" />
+
     <Button
         android:id="@+id/editButton"
         style="@style/Widget.Material3.Button.TonalButton"

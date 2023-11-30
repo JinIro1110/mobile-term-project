@@ -80,6 +80,12 @@
         android:stepSize="1"
         android:valueFrom="30"
         android:valueTo="100" />
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="0" />
 
     <Button
         android:id="@+id/startButton"

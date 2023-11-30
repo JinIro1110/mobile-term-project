@@ -2,18 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+
+<!--        -->
+
+<!--        <com.google.android.material.appbar.MaterialToolbar-->
+<!--            android:id="@+id/topAppBar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:minHeight="?attr/actionBarSize"-->
+<!--            app:title="" />-->
+
+<!--    </FrameLayout>-->
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_menu_24"
+        android:background="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="start"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hydrate Me!"
         android:textSize="50dp"
+        android:layout_marginTop="30dp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
         android:textAlignment="center"/>
 
         <FrameLayout
@@ -27,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_weight="1"
-                android:layout_marginBottom="20dp"
                 android:src="@drawable/water_bottle" />
 
             <ImageView
