@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@android:color/white">
+
+    <!-- 제목 '단상록' -->
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_routine_settings"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
+
+
+    <!-- 목표 달성 문구 -->
+    <TextView
+        android:id="@+id/textViewGoalAchievement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/goal_achievement_text"
+        android:layout_below="@id/textViewTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:textAlignment="center"/>
+
+
+
+    <!-- 진행 상황보기 버튼 -->
+<!--    <Button-->
+<!--        android:id="@+id/button_show_picker"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/view_progress"-->
+<!--        android:layout_below="@id/textViewGoalAchievement"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="32dp"/>-->
+
+    <!-- 프로그레스 바 -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewGoalAchievement"
+        android:layout_marginTop="16dp"
+        android:max="100"
+        android:progress="65"
+        android:progressDrawable="@drawable/progress_bar" />
+
+    <!-- 프로그레스 퍼센티지 텍스트뷰 -->
+    <TextView
+        android:id="@+id/textViewProgressPercentage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/progressBar"
+        android:layout_alignTop="@id/progressBar"
+        android:layout_alignRight="@id/progressBar"
+        android:layout_alignBottom="@id/progressBar"
+        android:gravity="center"
+        android:text="65%"
+        android:textStyle="bold" />
+
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/progressBar"
+        />
+
+    <!-- 이미지 뷰 -->
+    <ImageView
+        android:id="@+id/imageViewIllustration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/skate_baek"
+        android:layout_below="@id/calendarView"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
