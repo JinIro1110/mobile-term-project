@@ -40,6 +40,7 @@
         android:layout_marginTop="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/userName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text" />
@@ -88,7 +89,7 @@
         android:text="0" />
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/nextButton"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="170dp"
         android:layout_height="wrap_content"

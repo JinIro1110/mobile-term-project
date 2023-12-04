@@ -24,6 +24,8 @@
 
         <activity android:name=".CustomTargetActivity"></activity>
         <activity android:name=".AchievementRateActivity" />
+        <activity android:name=".Activity1"></activity>
+        <activity android:name=".Activity2"></activity>
   
         <meta-data
             android:name="preloaded_fonts"

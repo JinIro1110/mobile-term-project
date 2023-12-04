@@ -6,22 +6,50 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase db;
+    SharedPreferences sharedPreferences;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
 
         createDatabase();
         createTables();
+
+        Navigate();
+    }
+
+    private void Navigate() {
+        try {
+            String endDateStr = sharedPreferences.getString("endDate", null);
+            Date endDate = null;
+            if (endDateStr != null) {
+                endDate = dateFormat.parse(endDateStr);
+            }
+            Date currentDate = new Date();
+            if (endDate == null || currentDate.after(endDate)) {
+                Intent intent = new Intent(this, Activity2.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(this, Activity1.class);
+                startActivity(intent);
+            }
+            finish();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void createDatabase() {
@@ -51,9 +79,4 @@ public class MainActivity extends AppCompatActivity {
                 + " activity_status INTEGER NOT NULL CHECK (activity_status IN (0,1)) DEFAULT 0, "
                 + " water_reward INTEGER NOT NULL);");
     }
-
-    private void insertDummyData() {
-
-    }
-
 }
