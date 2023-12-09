@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
             }
             Date currentDate = new Date();
             if (endDate == null || currentDate.after(endDate)) {
+                dropTables();
+                createTables();
                 Intent intent = new Intent(this, Activity2.class);
                 startActivity(intent);
             } else {
@@ -80,4 +82,18 @@ public class MainActivity extends AppCompatActivity {
                 + " activity_status INTEGER NOT NULL CHECK (activity_status IN (0,1)) DEFAULT 0, "
                 + " water_reward INTEGER NOT NULL);");
     }
+
+    private void dropTables() {
+        try {
+            db.execSQL("DROP TABLE IF EXISTS DailyResult");
+            db.execSQL("DROP TABLE IF EXISTS ToDo");
+
+            Log.d("MyApp", "Debug message: All tables are dropped.");
+
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            println("Error dropping tables.");
+        }
+    }
+
 }
