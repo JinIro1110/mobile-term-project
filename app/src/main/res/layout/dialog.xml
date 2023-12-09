@@ -1,0 +1,19 @@
+<!-- 루틴 요소 생성 대화창 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/targetNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="할일을 입력하세요" />
+
+    <EditText
+        android:id="@+id/targetLiterEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="리터를 입력하세요" />
+</LinearLayout>

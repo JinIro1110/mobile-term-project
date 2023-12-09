@@ -2,8 +2,6 @@
     <string name="app_name">DailyWater</string>
     <string name="title_routine_settings">나의 진행상황</string>
     <string name="goal_achievement_text">N일 연속으로 목표 달성중!</string>
-    <string name="view_progress">달력으로 성공일 보기</string>
     <string name="title_achievement_rate">title_achievement_rate</string>
-    <string name="daily_motivation_quote">목표까지 얼마 남지 않았어요!</string>
 
 </resources>

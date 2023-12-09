@@ -1,5 +1,8 @@
 package com.example.dailywater;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,18 +12,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class Activity2 extends AppCompatActivity implements FragmentDataListener {
-    private setSharedPreferences sharedPreferences;
-
+    private SetSharedPreferences sharedPreferences;
+    private Date StartDate;
+    private Date EndDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page_2);
-        sharedPreferences = new setSharedPreferences(this);
+        sharedPreferences = new SetSharedPreferences(this);
         Button startButton = findViewById(R.id.startButton);
-        // 초기 프래그먼트 설정
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,10 +48,8 @@ public class Activity2 extends AppCompatActivity implements FragmentDataListener
 
         Fragment initialFragment;
         if (userName == null || weight == 0) {
-            // 이름 또는 몸무게가 설정되지 않았다면 info_input 프래그먼트로 이동
             initialFragment = new InfoInputFragment();
         } else {
-            // 이름과 몸무게가 모두 설정되었다면 target_setting 프래그먼트로 이동
             initialFragment = new TargetSettingFragment();
         }
 
@@ -55,20 +59,22 @@ public class Activity2 extends AppCompatActivity implements FragmentDataListener
 
 
     @Override
-    public void getNameWeight(String userName, int weight) {
+    public void setNameWeight(String userName, int weight) {
         sharedPreferences.saveName(userName);
         sharedPreferences.saveWeight(weight);
     }
 
     @Override
-    public void getLiters(int liters) {
+    public void setLiters(int liters) {
         sharedPreferences.saveLiters(liters);
     }
 
     @Override
-    public void getDate(Date startDate, Date endDate) {
-        sharedPreferences.saveStartDate(startDate); // 날짜 형식 변환 필요
-        sharedPreferences.saveEndDate(endDate); // 날짜 형식 변환 필요
+    public void setDate(Date startDate, Date endDate) {
+        this.StartDate = startDate;
+        this.EndDate = endDate;
+        sharedPreferences.saveStartDate(startDate);
+        sharedPreferences.saveEndDate(endDate);
     }
 
     @Override
@@ -77,5 +83,45 @@ public class Activity2 extends AppCompatActivity implements FragmentDataListener
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void changeActivity1(List<Routine> targetList) {
+        SQLiteDatabase db;
+        db = openOrCreateDatabase(
+                "HYDRATE_DB",
+                Activity.MODE_PRIVATE,
+                null);
+
+        for (Routine routine : targetList) {
+            String targetName = routine.getRoutineName();
+            int targetLiter = routine.getRoutineLiter();
+
+            // INSERT 문을 사용하여 데이터 삽입
+            String insertQuery = "INSERT INTO ToDo (activity_name, activity_status, water_reward) " +
+                    "VALUES ('" + targetName + "', 0, " + targetLiter + ")";
+            db.execSQL(insertQuery);
+        }
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(StartDate);
+        while (!calendar.getTime().after(EndDate)) {
+            String currentDateStr = sdf.format(calendar.getTime());
+
+            // INSERT 문을 사용하여 날짜 데이터 삽입
+            String insertDateQuery = "INSERT INTO DailyResult (date, success, water_drank) " +
+                    "VALUES ('" + currentDateStr + "', 0, 0)";
+            db.execSQL(insertDateQuery);
+
+            // 날짜를 하루씩 증가
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        // 데이터베이스 연결 종료
+        db.close();
+
+        Intent intent = new Intent(this, Activity1.class);
+        startActivity(intent);
+        finish();
     }
 }

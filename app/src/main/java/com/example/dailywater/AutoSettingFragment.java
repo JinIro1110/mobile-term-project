@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.google.android.material.slider.Slider;
-import com.google.android.material.textfield.TextInputEditText;
-
 import androidx.fragment.app.Fragment;
 
-public class InfoInputFragment extends Fragment {
+import java.util.Calendar;
+import java.util.Date;
+
+public class AutoSettingFragment extends Fragment {
     private FragmentDataListener listener;
 
     @Override
@@ -25,22 +25,23 @@ public class InfoInputFragment extends Fragment {
         }
     }
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.info_input, container, false);
+        View view = inflater.inflate(R.layout.auto_setting, container, false);
+        Button nextButton = view.findViewById(R.id.nextButton);
 
-        TextInputEditText nameEditText = view.findViewById(R.id.userName);
-        Slider weightSlider = view.findViewById(R.id.weightSlider);
-        Button submitButton = view.findViewById(R.id.nextButton);
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String userName = nameEditText.getText().toString();
-                int weight = (int) weightSlider.getValue();
+                listener.setLiters(2600);
+                Calendar calendar = Calendar.getInstance();
+                Date today = calendar.getTime();
 
-                listener.setNameWeight(userName, weight);
-                listener.nextFragment(new TargetSettingFragment());
+                // 2주 후의 날짜 계산
+                calendar.add(Calendar.WEEK_OF_YEAR, 2);
+                Date twoWeeksLater = calendar.getTime();
+
+                listener.setDate(today, twoWeeksLater);
+                listener.nextFragment(new TargetAddFragment());
             }
         });
 

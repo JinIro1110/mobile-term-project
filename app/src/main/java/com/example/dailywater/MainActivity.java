@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     Activity.MODE_PRIVATE,
                     null);
 
-            println("database is created.");
+            Log.d("MyApp", "Debug message: Database is created.");
 
         } catch(Exception ex) {
             ex.printStackTrace();

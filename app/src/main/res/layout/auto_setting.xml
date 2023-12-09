@@ -54,7 +54,7 @@
     </FrameLayout>
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/nextButton"
         style="@style/Widget.Material3.Button.TonalButton"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
