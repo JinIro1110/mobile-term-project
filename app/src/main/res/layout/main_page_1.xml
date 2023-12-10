@@ -7,20 +7,6 @@
     android:paddingRight="12dp"
     android:orientation="vertical">
 
-<!--    <FrameLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-
-<!--        -->
-
-<!--        <com.google.android.material.appbar.MaterialToolbar-->
-<!--            android:id="@+id/topAppBar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:minHeight="?attr/actionBarSize"-->
-<!--            app:title="" />-->
-
-<!--    </FrameLayout>-->
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="wrap_content"
@@ -39,45 +25,62 @@
         android:textStyle="bold"
         android:textAlignment="center"/>
 
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView">
-
-            <ImageView
-                android:id="@+id/waterBottleImageView"
-                android:layout_width="match_parent"
-                android:layout_height="500dp"
-                android:layout_weight="1"
-                android:src="@drawable/water_bottle" />
-
-            <ImageView
-                android:id="@+id/add"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginBottom="100dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center|end"
-                android:src="@drawable/add" />
-
-            <ImageView
-                android:id="@+id/remove"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="100dp"
-                android:layout_marginRight="20dp"
-                android:layout_gravity="center|end"
-                android:src="@drawable/remove" />
-        </FrameLayout>
-
-    <Button
-        android:id="@+id/startButton"
-        style="@style/Widget.Material3.Button.TonalButton"
-        android:layout_width="170dp"
+    <TextView
+        android:id="@+id/drinkAmountTextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="50dp"
-        android:text="달성률보기"
-        android:textAlignment="center" />
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center"/>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView">
+
+        <ImageView
+            android:id="@+id/waterBottleImageView"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:layout_weight="1"
+            android:src="@drawable/water_bottle" />
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="100dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center|end"
+            android:src="@drawable/add" />
+
+        <ImageView
+            android:id="@+id/remove"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:layout_gravity="center|end"
+            android:src="@drawable/remove" />
+
+        <Button
+            android:id="@+id/startButton"
+            style="@style/Widget.Material3.Button.TonalButton"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:text="달성률보기"
+            android:textAlignment="center" />
+    </FrameLayout>
+
+    <!-- Fragment를 위한 컨테이너; 기본적으로는 보이지 않음 -->
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+    </FrameLayout>
+
 </LinearLayout>
