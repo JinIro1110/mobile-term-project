@@ -18,14 +18,14 @@ import java.util.Date;
 import java.util.List;
 
 public class Activity2 extends AppCompatActivity implements FragmentDataListener {
-    private setSharedPreferences sharedPreferences;
+    private SetSharedPreferences sharedPreferences;
     private Date StartDate;
     private Date EndDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page_2);
-        sharedPreferences = new setSharedPreferences(this);
+        sharedPreferences = new SetSharedPreferences(this);
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override

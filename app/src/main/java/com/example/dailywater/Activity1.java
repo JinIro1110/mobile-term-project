@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class Activity1 extends AppCompatActivity {
 
-    private setSharedPreferences sharedPreferencesManager;
+    private SetSharedPreferences sharedPreferencesManager;
     private TextView drinkAmountTextView;
 
     @Override
@@ -78,7 +78,7 @@ public class Activity1 extends AppCompatActivity {
         });
 
 
-        sharedPreferencesManager = new setSharedPreferences(this);
+        sharedPreferencesManager = new SetSharedPreferences(this);
 
         drinkAmountTextView = findViewById(R.id.drinkAmountTextView);
 

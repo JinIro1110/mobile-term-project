@@ -33,7 +33,7 @@ public class AchievementFragment extends Fragment {
         View view = inflater.inflate(R.layout.achievement_fragment, container, false);
 
 
-        setSharedPreferences sharedPreferencesManager = new setSharedPreferences(getContext());
+        SetSharedPreferences sharedPreferencesManager = new SetSharedPreferences(getContext());
         int consecutiveDays = sharedPreferencesManager.calculateConsecutiveSuccessDays();
 
         ProgressBar progressBar = view.findViewById(R.id.progressBar);
@@ -95,7 +95,7 @@ public class AchievementFragment extends Fragment {
         return days;
     }
 
-    private float calculateSuccessPercentage(setSharedPreferences sharedPreferencesManager) {
+    private float calculateSuccessPercentage(SetSharedPreferences sharedPreferencesManager) {
         Date startDate = sharedPreferencesManager.getStartDate();
         Date endDate = sharedPreferencesManager.getEndDate();
         Date today = new Date();

@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 "('독서하기', 0, 300), " +
                 "('코딩하기', 1, 700);";
         db.execSQL(insertToDo);
+    }
 
     private void dropTables() {
         try {
