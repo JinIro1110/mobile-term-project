@@ -182,4 +182,14 @@ public class SetSharedPreferences {
     }
 
 
+    public void incrementLitersByAmount(int amount) {
+        int currentLiters = sharedPreferences.getInt("liters", 0);
+        sharedPreferences.edit().putInt("liters", currentLiters + amount).apply();
+    }
+
+    public void decrementLitersByAmount(int amount) {
+        int currentLiters = sharedPreferences.getInt("liters", 0);
+        int newLiters = Math.max(currentLiters - amount, 0); // 리터 값이 음수가 되지 않도록 합니다.
+        sharedPreferences.edit().putInt("liters", newLiters).apply();
+    }
 }

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 createTables();
                 startActivity(intent);
             } else {
-                Intent intent = new Intent(this, Activity2.class);
+                Intent intent = new Intent(this, Activity1.class);
                 startActivity(intent);
             }
             finish();
@@ -124,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 "('2023-12-06', 0, 1000), " +
                 "('2023-12-07', 1, 1000), " +
                 "('2023-12-08', 1, 1000), " +
-                "('2023-12-09', 1, 2000);";
+                "('2023-12-09', 1, 1000), " +
+                "('2023-12-10', 1, 1000), " +
+                "('2023-12-11', 1, 2000);";
         db.execSQL(insertDailyResult);
 
         String insertToDo = "INSERT INTO ToDo (activity_name, activity_status, water_reward) VALUES " +
