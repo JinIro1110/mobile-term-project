@@ -1,7 +1,11 @@
 package com.example.dailywater;
 
 import android.annotation.SuppressLint;
+
+import android.content.Intent;
+
 import android.content.Context;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -19,6 +23,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +50,19 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page_1);
         drawerLayout = findViewById(R.id.drawerLayout);
+
+
+        ImageButton homeButton = findViewById(R.id.homeButton);
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 현재 액티비티 재시작
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
+
         ImageButton menuButton = findViewById(R.id.imageButton);
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +71,17 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
                 drawerLayout.openDrawer(GravityCompat.START); // 드로어 열기
             }
         });
+
+
+        ImageButton menuButton = findViewById(R.id.imageButton);
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setupDrawerRecyclerView(); // RecyclerView 설정 및 데이터 로드
+                drawerLayout.openDrawer(GravityCompat.START); // 드로어 열기
+            }
+        });
+
 
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +120,35 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
             }
         });
 
+        ImageButton settingsButton = findViewById(R.id.imageButtonSettings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditProfileFragment editProfileFragment = new EditProfileFragment();
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, editProfileFragment);
+
+                fragmentTransaction.commit();
+
+                findViewById(R.id.imageButton).setVisibility(View.GONE);
+                findViewById(R.id.textView).setVisibility(View.GONE);
+                findViewById(R.id.drinkAmountTextView).setVisibility(View.GONE);
+                findViewById(R.id.waterBottleImageView).setVisibility(View.GONE);
+                findViewById(R.id.add).setVisibility(View.GONE);
+                findViewById(R.id.remove).setVisibility(View.GONE);
+                findViewById(R.id.startButton).setVisibility(View.GONE);
+
+                // Set FrameLayout parameters if necessary
+                FrameLayout frameLayout = findViewById(R.id.frameLayout);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT);
+                frameLayout.setLayoutParams(params);
+                frameLayout.setVisibility(View.VISIBLE); // Show the FrameLayout
+            }
+        });
 
         sharedPreferencesManager = new SetSharedPreferences(this);
 
@@ -133,8 +192,6 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 
     private ArrayList<ToDoItem> getToDoItemsFromDatabase() {
         SQLiteDatabase db = openOrCreateDatabase("HYDRATE_DB", MODE_PRIVATE, null);
