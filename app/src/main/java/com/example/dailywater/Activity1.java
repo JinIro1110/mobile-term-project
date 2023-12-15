@@ -72,17 +72,6 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
             }
         });
 
-
-        ImageButton menuButton = findViewById(R.id.imageButton);
-        menuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setupDrawerRecyclerView(); // RecyclerView 설정 및 데이터 로드
-                drawerLayout.openDrawer(GravityCompat.START); // 드로어 열기
-            }
-        });
-
-
         Button startButton = findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override

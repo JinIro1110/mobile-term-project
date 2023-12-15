@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
             Date currentDate = new Date();
             if (endDate == null || currentDate.after(endDate)) {
-                Intent intent = new Intent(this, Activity1.class);
+                Intent intent = new Intent(this, Activity2.class);
                 dropTables();
                 createTables();
                 startActivity(intent);
