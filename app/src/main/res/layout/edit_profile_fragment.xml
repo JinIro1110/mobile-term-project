@@ -1,22 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- 이름 라벨 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:layout_marginBottom="4dp" />
+
     <EditText
         android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이름"
+        android:hint="이름을 입력하세요"
         android:inputType="textPersonName" />
+
+    <!-- 몸무게 라벨 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="몸무게"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp" />
 
     <EditText
         android:id="@+id/editWeight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="몸무게"
+        android:hint="몸무게를 입력하세요 (kg)"
         android:inputType="number" />
 
     <Button
