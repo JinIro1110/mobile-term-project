@@ -11,9 +11,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.dailywater.R;
 import com.example.dailywater.SetSharedPreferences;
+import com.example.dailywater.dto.ToDoItem;
+
+import java.util.ArrayList;
 
 public class EditProfileFragment extends Fragment {
     private EditText editName;
@@ -50,6 +55,20 @@ public class EditProfileFragment extends Fragment {
                 Toast.makeText(getActivity(), "프로필이 업데이트 되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
+
+        Button settingTodoButton = view.findViewById(R.id.setting_todo);
+        settingTodoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditToDoFragment editTodoFragment = new EditToDoFragment();
+                FragmentManager fragmentManager = getParentFragmentManager(); // API level에 따라 getFragmentManager() 또는 getParentFragmentManager() 사용
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frameLayout, editTodoFragment);
+                fragmentTransaction.addToBackStack(null); // 이전 프래그먼트로 돌아갈 수 있도록 백스택에 추가
+                fragmentTransaction.commit();
+            }
+        });
+
 
         return view;
     }
