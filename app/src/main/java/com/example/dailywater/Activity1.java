@@ -220,7 +220,7 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
         }
     }
 
-    private void recordDailySuccess() {
+    private void recordDailyResult(boolean isSuccess) {
         SQLiteDatabase db = openOrCreateDatabase("HYDRATE_DB", MODE_PRIVATE, null);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -228,7 +228,7 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
 
         ContentValues values = new ContentValues();
         values.put("date", currentDate);
-        values.put("success", 1);
+        values.put("success", isSuccess ? 1 : 0);
 
         Cursor cursor = db.rawQuery("SELECT _id FROM DailyResult WHERE date = ?", new String[]{currentDate});
         if (cursor.moveToFirst()) {
@@ -240,30 +240,15 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
 
         cursor.close();
         db.close();
+    }
+
+    private void recordDailySuccess() {
+        recordDailyResult(true);
     }
 
     private void recordDailyFailure() {
-        SQLiteDatabase db = openOrCreateDatabase("HYDRATE_DB", MODE_PRIVATE, null);
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String currentDate = dateFormat.format(new Date());
-
-        ContentValues values = new ContentValues();
-        values.put("date", currentDate);
-        values.put("success", 0); // 실패 상황을 나타내기 위해 0으로 설정
-
-        Cursor cursor = db.rawQuery("SELECT _id FROM DailyResult WHERE date = ?", new String[]{currentDate});
-        if (cursor.moveToFirst()) {
-            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("_id"));
-            db.update("DailyResult", values, "_id = ?", new String[]{String.valueOf(id)});
-        } else {
-            db.insert("DailyResult", null, values);
-        }
-
-        cursor.close();
-        db.close();
+        recordDailyResult(false);
     }
-
 
     private ArrayList<String> getDaysFromDatabase(int successValue) {
         ArrayList<String> days = new ArrayList<>();
