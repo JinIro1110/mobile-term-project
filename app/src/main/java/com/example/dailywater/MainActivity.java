@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         createDatabase();
         createTables();
         deleteAllDataFromTables();
-        insertDummyData();
+//        insertDummyData();
 //        setStartEndDate();
 
         Navigate();

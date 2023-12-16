@@ -56,22 +56,6 @@
         android:textStyle="bold"
         android:layout_marginTop="80dp"
         android:layout_gravity="center_horizontal" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/weightTextField"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="몸무게를 입력해주세요!"
-        app:startIconDrawable="@drawable/add"
-        app:startIconContentDescription="몸무게"
-        app:endIconMode="clear_text"
-        android:layout_marginTop="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/weightSlider"

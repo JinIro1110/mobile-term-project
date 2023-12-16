@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 public class InfoInputFragment extends Fragment {
     private FragmentDataListener listener;
+    private TextView weightTextView;
 
     @Override
     public void onAttach(Context context) {
@@ -32,6 +34,16 @@ public class InfoInputFragment extends Fragment {
         TextInputEditText nameEditText = view.findViewById(R.id.userName);
         Slider weightSlider = view.findViewById(R.id.weightSlider);
         Button submitButton = view.findViewById(R.id.nextButton);
+        weightTextView = view.findViewById(R.id.weight);
+
+        weightSlider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(Slider slider, float value, boolean fromUser) {
+                // Slider 값이 변경될 때 호출됩니다.
+                // TextView에 값을 업데이트합니다.
+                weightTextView.setText(String.valueOf((int) value));
+            }
+        });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
