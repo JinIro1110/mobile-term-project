@@ -2,6 +2,7 @@ package com.example.dailywater;
 
 import android.annotation.SuppressLint;
 
+import android.content.ContentValues;
 import android.content.Intent;
 
 import android.content.Context;
@@ -32,7 +33,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dailywater.dto.ToDoItem;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class Activity1 extends AppCompatActivity implements OnDrinkAmountChangedListener {
 
@@ -67,8 +71,8 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
         menuButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setupDrawerRecyclerView(); // RecyclerView 설정 및 데이터 로드
-                drawerLayout.openDrawer(GravityCompat.START); // 드로어 열기
+                setupDrawerRecyclerView();
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
@@ -105,7 +109,7 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);
                 frameLayout.setLayoutParams(params);
-                frameLayout.setVisibility(View.VISIBLE); // FrameLayout을 보이게 설정
+                frameLayout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -129,13 +133,12 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
                 findViewById(R.id.remove).setVisibility(View.GONE);
                 findViewById(R.id.startButton).setVisibility(View.GONE);
 
-                // Set FrameLayout parameters if necessary
                 FrameLayout frameLayout = findViewById(R.id.frameLayout);
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
                         LinearLayout.LayoutParams.MATCH_PARENT);
                 frameLayout.setLayoutParams(params);
-                frameLayout.setVisibility(View.VISIBLE); // Show the FrameLayout
+                frameLayout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -206,7 +209,61 @@ public class Activity1 extends AppCompatActivity implements OnDrinkAmountChanged
         int milliliters = sharedPreferencesManager.getLiters();
         double liters = milliliters / 1000.0;
         drinkAmountTextView.setText(String.format("%.1fL", liters));
+
+        // liters가 0이면 "완료!"로 표시, 그렇지 않으면 현재 리터값을 표시
+        if (liters == 0) {
+            drinkAmountTextView.setText("완료!");
+            recordDailySuccess();
+        } else {
+            recordDailyFailure();
+            drinkAmountTextView.setText(String.format("%.1fL", liters));
+        }
     }
+
+    private void recordDailySuccess() {
+        SQLiteDatabase db = openOrCreateDatabase("HYDRATE_DB", MODE_PRIVATE, null);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDate = dateFormat.format(new Date());
+
+        ContentValues values = new ContentValues();
+        values.put("date", currentDate);
+        values.put("success", 1);
+
+        Cursor cursor = db.rawQuery("SELECT _id FROM DailyResult WHERE date = ?", new String[]{currentDate});
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("_id"));
+            db.update("DailyResult", values, "_id = ?", new String[]{String.valueOf(id)});
+        } else {
+            db.insert("DailyResult", null, values);
+        }
+
+        cursor.close();
+        db.close();
+    }
+
+    private void recordDailyFailure() {
+        SQLiteDatabase db = openOrCreateDatabase("HYDRATE_DB", MODE_PRIVATE, null);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String currentDate = dateFormat.format(new Date());
+
+        ContentValues values = new ContentValues();
+        values.put("date", currentDate);
+        values.put("success", 0); // 실패 상황을 나타내기 위해 0으로 설정
+
+        Cursor cursor = db.rawQuery("SELECT _id FROM DailyResult WHERE date = ?", new String[]{currentDate});
+        if (cursor.moveToFirst()) {
+            @SuppressLint("Range") int id = cursor.getInt(cursor.getColumnIndex("_id"));
+            db.update("DailyResult", values, "_id = ?", new String[]{String.valueOf(id)});
+        } else {
+            db.insert("DailyResult", null, values);
+        }
+
+        cursor.close();
+        db.close();
+    }
+
 
     private ArrayList<String> getDaysFromDatabase(int successValue) {
         ArrayList<String> days = new ArrayList<>();

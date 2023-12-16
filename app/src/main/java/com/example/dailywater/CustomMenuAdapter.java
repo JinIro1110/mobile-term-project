@@ -54,25 +54,20 @@ public class CustomMenuAdapter extends RecyclerView.Adapter<CustomMenuAdapter.Vi
         holder.checkBoxStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 체크 상태를 토글합니다.
-                boolean isChecked = holder.checkBoxStatus.isChecked();
-                // 데이터베이스에 상태 변경을 반영합니다.
-                updateToDoStatus(holder.itemView.getContext(), item.getId(), isChecked ? 1 : 0);
-                // 내부 데이터를 업데이트합니다.
-                item.setActivityStatus(isChecked ? 1 : 0);
+                item.toggleStatus();
 
-                int currentLiters = sharedPreferencesManager.getLiters();
-
-                // 체크 상태에 따라 리터 값을 증가시키거나 감소시킵니다.
-                if (isChecked) {
-                    // 체크 됐을 때는 water_reward 값을 추가합니다.
-                    sharedPreferencesManager.incrementLitersByAmount(item.getWaterReward());
-                } else {
-                    // 체크 해제 됐을 때는 water_reward 값을 감소시킵니다.
+                // 체크 상태에 따라 데이터베이스 업데이트 및 리터 업데이트
+                updateToDoStatus(holder.itemView.getContext(), item.getId(), item.getActivityStatus());
+                if (item.getActivityStatus() == 1) {
                     sharedPreferencesManager.decrementLitersByAmount(item.getWaterReward());
+                } else {
+                    sharedPreferencesManager.incrementLitersByAmount(item.getWaterReward());
                 }
-                listener.onDrinkAmountChanged();
+                // UI 업데이트
+                holder.activityStatus.setText(item.getActivityStatus() == 1 ? "완료" : "대기");
+                holder.checkBoxStatus.setChecked(item.getActivityStatus() == 1);
 
+                listener.onDrinkAmountChanged();
             }
         });
     }

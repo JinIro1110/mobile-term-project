@@ -13,6 +13,10 @@ public class ToDoItem {
         this.waterReward = waterReward;
     }
 
+    public void toggleStatus() {
+        this.activityStatus = this.activityStatus == 0 ? 1 : 0;
+    }
+
     public int getId() {
         return id;
     }
